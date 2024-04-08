@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人资料</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+#selected-tags {
+    margin-top: 20px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>个人资料</h2>
+
+    <div class="form-group">
+        <label>个性特征：</label>
+        <input type="checkbox" id="open-minded">
+        <label for="open-minded">开放心态</label>
+        <!-- 其他个性特征标签 -->
+    </div>
+
+    <div class="form-group">
+        <label>性偏好：</label>
+        <input type="checkbox" id="active">
+        <label for="active">主动攻击</label>
+        <!-- 其他性偏好标签 -->
+    </div>
+
+    <div class="form-group">
+        <label>偏好体验：</label>
+        <input type="checkbox" id="gentle-language">
+        <label for="gentle-language">温柔的语言交流</label>
+        <!-- 其他偏好体验标签 -->
+    </div>
+
+    <div class="form-group">
+        <label>偏好对象属性：</label>
+        <!-- 国家选择 -->
+        <input type="text" id="country" placeholder="国家选择">
+    </div>
+
+    <div id="selected-tags">
+        <h3>已选标签：</h3>
+    </div>
+</div>
+
+<script>
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+const countryInput = document.getElementById('country');
+const selectedTagsContainer = document.getElementById('selected-tags');
+
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            addTag(this.nextElementSibling.textContent);
+        } else {
+            removeTag(this.nextElementSibling.textContent);
+        }
+    });
+});
+
+function addTag(tag) {
+    const tagElement = document.createElement('span');
+    tagElement.textContent = tag;
+    selectedTagsContainer.appendChild(tagElement);
+}
+
+function removeTag(tag) {
+    const tags = selectedTagsContainer.querySelectorAll('span');
+    tags.forEach(tagElement => {
+        if (tagElement.textContent === tag) {
+            tagElement.remove();
+        }
+    });
+}
+</script>
+
+</body>
+</html>
